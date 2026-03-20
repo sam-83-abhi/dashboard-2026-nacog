@@ -231,6 +231,14 @@ st.markdown(f"""
 
 # --- Sidebar ---
 with st.sidebar:
+    st.markdown(f"""
+    <div style="border-radius:12px;overflow:hidden;margin-bottom:15px;box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+        <img src="data:image/jpeg;base64,{bg_base64[0]}" style="width:100%;height:120px;object-fit:cover;"/>
+        <div style="padding:8px 12px;background:linear-gradient(135deg,#667eea,#764ba2);text-align:center;">
+            <p style="color:#fff;margin:0;font-size:0.8rem;">📍 Denver, Colorado</p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown("## 🎛️ Filters")
     st.markdown("---")
     statuses = st.multiselect("📌 Status", df["Status"].dropna().unique(), default=df["Status"].dropna().unique())

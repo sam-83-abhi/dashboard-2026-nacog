@@ -14,19 +14,22 @@ def check_password():
         @keyframes glow { 0%,100% { text-shadow:0 0 10px rgba(102,126,234,0.3); } 50% { text-shadow:0 0 30px rgba(102,126,234,0.6), 0 0 60px rgba(245,87,108,0.3); } }
         @keyframes sparkle { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
         @keyframes bgCrossfade {
-            0%,18%   { background-image: url('https://images.unsplash.com/photo-1546587348-d12660c30c50?w=1600&q=80'); }
-            22%,43%  { background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1600&q=80'); }
-            47%,68%  { background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80'); }
-            72%,93%  { background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1600&q=80'); }
-            97%,100% { background-image: url('https://images.unsplash.com/photo-1546587348-d12660c30c50?w=1600&q=80'); }
+            0%,11%   { background-image: url('https://images.unsplash.com/photo-1546587348-d12660c30c50?w=1600&q=80'); }
+            14%,25%  { background-image: url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=1600&q=80'); }
+            28%,39%  { background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80'); }
+            42%,53%  { background-image: url('https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=1600&q=80'); }
+            56%,67%  { background-image: url('https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=1600&q=80'); }
+            70%,81%  { background-image: url('https://images.unsplash.com/photo-1444464666168-49d633b86797?w=1600&q=80'); }
+            84%,95%  { background-image: url('https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=1600&q=80'); }
+            98%,100% { background-image: url('https://images.unsplash.com/photo-1546587348-d12660c30c50?w=1600&q=80'); }
         }
         .stApp {
             background-size:cover !important; background-position:center !important;
-            animation: bgCrossfade 28s ease-in-out infinite;
+            animation: bgCrossfade 40s ease-in-out infinite;
         }
         .stApp::before {
             content:""; position:fixed; top:0; left:0; width:100%; height:100%;
-            background: linear-gradient(135deg, rgba(10,10,30,0.7), rgba(48,43,99,0.5), rgba(10,10,30,0.7));
+            background: linear-gradient(135deg, rgba(10,10,30,0.45), rgba(48,43,99,0.3), rgba(10,10,30,0.45));
             z-index:0;
         }
         .stApp > * { position:relative; z-index:1; }
@@ -69,13 +72,13 @@ def check_password():
                     box-shadow:0 25px 70px rgba(0,0,0,0.5);max-width:440px;width:100%;
                     border:1px solid rgba(102,126,234,0.2);overflow:hidden;">
             <div style="padding:40px 45px 10px;">
-                <div class="login-emoji" style="font-size:3.5rem;margin-bottom:12px;">📊</div>
-                <h1 class="shimmer-title" style="margin:0 0 6px;font-size:2.2rem;font-weight:800;">NACOG 2026</h1>
-                <p class="shimmer-sub" style="margin:0 0 8px;font-size:1.15rem;font-weight:600;letter-spacing:2px;">✦ Conference Dashboard ✦</p>
-                <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 5px;animation:float 4s ease-in-out infinite;">
-                    <span style="color:#f5576c;animation:sparkle 2s ease-in-out infinite;">✈</span>
-                    <p style="color:#a0a0c0;margin:0;font-size:0.95rem;letter-spacing:1px;">📍 Denver, Colorado &nbsp;•&nbsp; July 2026</p>
-                    <span style="color:#fee140;animation:sparkle 2s ease-in-out 0.5s infinite;">⛰</span>
+                <div class="login-emoji" style="font-size:4.5rem;margin-bottom:14px;">📊</div>
+                <h1 class="shimmer-title" style="margin:0 0 10px;font-size:3rem;font-weight:800;">NACOG 2026</h1>
+                <p class="shimmer-sub" style="margin:0 0 12px;font-size:1.5rem;font-weight:600;letter-spacing:2px;">✦ Conference Dashboard ✦</p>
+                <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin:10px 0 5px;animation:float 4s ease-in-out infinite;">
+                    <span style="color:#f5576c;font-size:1.5rem;animation:sparkle 2s ease-in-out infinite;">✈</span>
+                    <p style="color:#e0e0f0;margin:0;font-size:1.2rem;letter-spacing:1px;">📍 Denver, Colorado &nbsp;•&nbsp; July 2026</p>
+                    <span style="color:#fee140;font-size:1.5rem;animation:sparkle 2s ease-in-out 0.5s infinite;">⛰</span>
                 </div>
             </div>
             <div class="login-divider"></div>

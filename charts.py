@@ -136,7 +136,7 @@ def render_row4(fdf):
     with r4c2:
         diet = pd.Series(dtype=str)
         for c in [c for c in fdf.columns if "dietary restrictions" in c.lower()]:
-            d = fdf[c].dropna()
+            d = fdf[c].dropna().astype(str)
             d = d[d.str.strip() != ""]
             diet = pd.concat([diet, d])
         if len(diet) > 0:

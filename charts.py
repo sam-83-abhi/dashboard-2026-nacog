@@ -209,7 +209,7 @@ def render_community(fdf):
     st.plotly_chart(fig, use_container_width=True)
 
 def render_airport(fdf):
-    st.markdown("### ✈️ Airport Logistics")
+
     pickup_df = fdf[fdf["Do you need airport pickup?"].eq("Yes")][
         ["Full Name", "Pickup Airport", "Arrival Date", "Arrival Time", "Arrival Airline", "Arrival Flight #"]
     ].fillna("")
@@ -231,7 +231,7 @@ def render_airport(fdf):
             st.markdown("No drop-off requests")
 
 def render_table(fdf):
-    st.markdown("### 📋 Registrant Details")
+
     display_cols = ["Full Name", "Email", "Gender", "Age Group", "Ticket Level", "Status",
                     "Address (City)", "Address (State)", "Ticket Total ($ Amount)", "Sold Date"]
     table_df = fdf[display_cols].sort_values("Sold Date", ascending=False).reset_index(drop=True)

@@ -77,17 +77,17 @@ if bg_base64:
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover; background-position: center;
             animation: bgSlide {duration}s infinite;
-            opacity: 0.06;
+            opacity: 0.03;
             z-index: 0;
             pointer-events: none;
         }}
         @keyframes bgSlide {{ {keyframes} }}
         .stApp > * {{ position: relative; z-index: 1; }}
         .block-container {{
-            background: rgba(255,255,255,0.88);
+            background: rgba(255,255,255,0.95);
             border-radius: 16px;
             padding: 1.5rem 2rem !important;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(10px);
         }}
     </style>
     """, unsafe_allow_html=True)

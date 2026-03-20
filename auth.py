@@ -78,11 +78,24 @@ def check_password():
                     padding:0;border-radius:24px;text-align:center;
                     box-shadow:0 25px 70px rgba(0,0,0,0.5);max-width:440px;width:100%;
                     border:1px solid rgba(102,126,234,0.2);overflow:hidden;">
+        @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+        @keyframes glow { 0%,100% { text-shadow:0 0 10px rgba(102,126,234,0.3); } 50% { text-shadow:0 0 30px rgba(102,126,234,0.6), 0 0 60px rgba(245,87,108,0.3); } }
+        @keyframes typeIn { from { width:0; opacity:0; } to { width:100%; opacity:1; } }
+        @keyframes sparkle { 0%,100% { opacity:0.4; } 50% { opacity:1; } }
+
             <div style="padding:40px 45px 10px;">
                 <div class="login-emoji" style="font-size:3.5rem;margin-bottom:12px;">🎉</div>
-                <h1 class="shimmer-text" style="margin:0 0 6px;font-size:2.2rem;font-weight:800;">NACOG 2026</h1>
-                <p style="color:#e0e0f0;margin:0 0 4px;font-size:1.15rem;font-weight:600;letter-spacing:1px;">Conference Dashboard</p>
-                <p style="color:#a0a0c0;margin:0 0 5px;font-size:0.9rem;">📍 Denver, Colorado &nbsp;•&nbsp; July 2026</p>
+                <h1 class="shimmer-text" style="margin:0 0 6px;font-size:2.2rem;font-weight:800;animation:shimmer 4s linear infinite, glow 3s ease-in-out infinite;">NACOG 2026</h1>
+                <p style="color:#e0e0f0;margin:0 0 8px;font-size:1.15rem;font-weight:600;letter-spacing:2px;
+                          animation:fadeInUp 1.2s ease-out;
+                          background:linear-gradient(90deg,#667eea,#e0e0f0,#667eea);background-size:200% auto;
+                          -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                          animation:shimmer 6s linear infinite;">✦ Conference Dashboard ✦</p>
+                <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 5px;animation:float 4s ease-in-out infinite;">
+                    <span style="color:#f5576c;animation:sparkle 2s ease-in-out infinite;">✈</span>
+                    <p style="color:#a0a0c0;margin:0;font-size:0.95rem;letter-spacing:1px;">📍 Denver, Colorado &nbsp;•&nbsp; July 2026</p>
+                    <span style="color:#fee140;animation:sparkle 2s ease-in-out 0.5s infinite;">⛰</span>
+                </div>
             </div>
             <div class="login-divider"></div>
             <div style="padding:15px 45px 30px;">

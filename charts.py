@@ -115,7 +115,7 @@ def render_row3(fdf):
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
     with r3c3:
-        p = fdf["Do you need airport pickup?"].value_counts().reset_index()
+        p = fdf["Do you need airport pickup?"].fillna("Unknown").value_counts().reset_index()
         p.columns = ["Pickup", "Count"]
         fig = px.bar(p, x="Pickup", y="Count", title="✈️ Airport Pickup", color="Pickup",
                      color_discrete_sequence=COLORS, text_auto=True)

@@ -126,7 +126,7 @@ def render_row3(fdf):
 def render_row4(fdf):
     r4c1, r4c2, r4c3 = st.columns(3)
     with r4c1:
-        meal_cols = [c for c in fdf.columns if c.lower().startswith("food: do you wish to add meal plan") or c.lower().startswith("food: do you wish to add a meal plan")]
+        meal_cols = [c for c in fdf.columns if (c.lower().startswith("food: do you wish to add meal plan") or c.lower().startswith("food: do you wish to add a meal plan")) and "amount" not in c.lower()]
         meal = pd.concat([fdf[c].dropna() for c in meal_cols])
         m = meal.value_counts().reset_index()
         m.columns = ["Meal Plan", "Count"]

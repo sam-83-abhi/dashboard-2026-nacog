@@ -50,7 +50,7 @@ def render_row1(fdf):
         lc.columns = ["Ticket Level", "Count"]
         fig = px.pie(lc, names="Ticket Level", values="Count", title="🎫 Ticket Level",
                      color_discrete_sequence=COLORS, hole=0.55)
-        fig.update_traces(textinfo="value+label", textfont_size=11, marker=dict(line=dict(color="#1a1a2e", width=2)))
+        fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
     with r1c3:
@@ -103,7 +103,7 @@ def render_row3(fdf):
         sc.columns = ["Status", "Count"]
         fig = px.pie(sc, names="Status", values="Count", title="💳 Payment",
                      color_discrete_sequence=["#00b09b", "#f5576c", "#fee140"], hole=0.55)
-        fig.update_traces(textinfo="value+label", textfont_size=11, marker=dict(line=dict(color="#1a1a2e", width=2)))
+        fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
     with r3c2:
@@ -111,7 +111,7 @@ def render_row3(fdf):
         h.columns = ["Hotel Needed", "Count"]
         fig = px.pie(h, names="Hotel Needed", values="Count", title="🏨 Hotel",
                      color_discrete_sequence=COLORS, hole=0.55)
-        fig.update_traces(textinfo="value+label", textfont_size=11, marker=dict(line=dict(color="#1a1a2e", width=2)))
+        fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
     with r3c3:
@@ -132,7 +132,7 @@ def render_row4(fdf):
         m.columns = ["Meal Plan", "Count"]
         fig = px.pie(m, names="Meal Plan", values="Count", title="🍽️ Meal Plan",
                      color_discrete_sequence=COLORS, hole=0.55)
-        fig.update_traces(textinfo="value+label", textfont_size=11, marker=dict(line=dict(color="#1a1a2e", width=2)))
+        fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
     with r4c2:
@@ -194,7 +194,7 @@ def render_row5(fdf):
             rc.columns = ["Room Type", "Count"]
             fig = px.pie(rc, names="Room Type", values="Count", title="🛏️ Room Preference",
                          color_discrete_sequence=COLORS, hole=0.55)
-            fig.update_traces(textinfo="value+label", textfont_size=11, marker=dict(line=dict(color="#1a1a2e", width=2)))
+            fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
             fig.update_layout(**CHART_LAYOUT)
         else:
             fig = go.Figure()

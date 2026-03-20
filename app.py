@@ -121,6 +121,13 @@ st.markdown("""
         height: 3px; border-radius: 2px; margin: 10px 0 20px;
         background: linear-gradient(90deg, #667eea, #764ba2, #f5576c, #fee140);
     }
+    .chart-card {
+        background: rgba(18,18,42,0.6);
+        border: 1px solid rgba(102,126,234,0.15);
+        border-radius: 14px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -204,12 +211,13 @@ CHART_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(18,18,42,0.5)",
     font=dict(family="Inter", color="#e0e0f0"),
-    margin=dict(l=20, r=20, t=50, b=20),
-    title_font=dict(size=16, color="#ffffff"),
+    margin=dict(l=10, r=10, t=40, b=10),
+    title_font=dict(size=14, color="#ffffff"),
+    height=280,
 )
 
-# --- Row 1 ---
-r1c1, r1c2 = st.columns(2)
+# --- Row 1: Growth + Tickets + Gender ---
+r1c1, r1c2, r1c3 = st.columns(3)
 
 with r1c1:
     daily = fdf.dropna(subset=["Sold Date"]).groupby(fdf["Sold Date"].dt.date).size().reset_index(name="Count")
@@ -224,49 +232,37 @@ with r1c1:
 with r1c2:
     level_counts = fdf["Ticket Level"].value_counts().reset_index()
     level_counts.columns = ["Ticket Level", "Count"]
-    fig = px.pie(level_counts, names="Ticket Level", values="Count", title="🎫 Ticket Level Breakdown",
-                 color_discrete_sequence=COLORS, hole=0.5)
-    fig.update_traces(textinfo="percent+label", textfont_size=13,
-                      marker=dict(line=dict(color="#fff", width=2)))
+    fig = px.pie(level_counts, names="Ticket Level", values="Count", title="🎫 Ticket Level",
+                 color_discrete_sequence=COLORS, hole=0.55)
+    fig.update_traces(textinfo="percent+label", textfont_size=11,
+                      marker=dict(line=dict(color="#1a1a2e", width=2)))
     fig.update_layout(**CHART_LAYOUT)
     st.plotly_chart(fig, use_container_width=True)
 
-# --- Row 2 ---
-r2c1, r2c2 = st.columns(2)
-
-with r2c1:
+with r1c3:
     gender = fdf["Gender"].value_counts().reset_index()
     gender.columns = ["Gender", "Count"]
-    fig = px.bar(gender, x="Gender", y="Count", title="👥 Gender Distribution",
+    fig = px.bar(gender, x="Gender", y="Count", title="👥 Gender",
                  color="Gender", color_discrete_sequence=COLORS, text_auto=True)
     fig.update_traces(marker_line_width=0, textposition="outside")
     fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
     st.plotly_chart(fig, use_container_width=True)
 
-with r2c2:
+st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
+
+# --- Row 2: Age + Sessions + Map ---
+r2c1, r2c2, r2c3 = st.columns(3)
+
+with r2c1:
     age = fdf["Age Group"].value_counts().reset_index()
     age.columns = ["Age Group", "Count"]
-    fig = px.bar(age, x="Count", y="Age Group", title="📊 Age Group Distribution",
+    fig = px.bar(age, x="Count", y="Age Group", title="📊 Age Groups",
                  color="Age Group", color_discrete_sequence=COLORS, text_auto=True, orientation="h")
     fig.update_traces(marker_line_width=0, textposition="outside")
     fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.35)
     st.plotly_chart(fig, use_container_width=True)
 
-st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
-
-# --- Row 3 ---
-r3c1, r3c2 = st.columns(2)
-
-with r3c1:
-    state_counts = fdf["Address (State)"].value_counts().reset_index()
-    state_counts.columns = ["State", "Count"]
-    fig = px.choropleth(state_counts, locations="State", locationmode="USA-states",
-                        color="Count", scope="usa", title="🗺️ Registrations by State",
-                        color_continuous_scale=["#e0e7ff", "#667eea", "#302b63"])
-    fig.update_layout(**CHART_LAYOUT, geo=dict(bgcolor="rgba(0,0,0,0)", lakecolor="rgba(0,0,0,0)"))
-    st.plotly_chart(fig, use_container_width=True)
-
-with r3c2:
+with r2c2:
     sessions = {
         "General": fdf["Which sessions would you like to attend? (General Session)"].eq("Yes").sum(),
         "English": fdf["Which sessions would you like to attend? (English Session)"].eq("Yes").sum(),
@@ -274,54 +270,52 @@ with r3c2:
         "Children's": fdf["Which sessions would you like to attend? (Childrens Session)"].eq("Yes").sum(),
     }
     sess_df = pd.DataFrame(list(sessions.items()), columns=["Session", "Count"])
-    fig = px.bar(sess_df, x="Session", y="Count", title="📋 Session Preferences",
+    fig = px.bar(sess_df, x="Session", y="Count", title="📋 Sessions",
                  color="Session", color_discrete_sequence=COLORS, text_auto=True)
     fig.update_traces(marker_line_width=0, textposition="outside")
     fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
     st.plotly_chart(fig, use_container_width=True)
 
-# --- Row 4 ---
-r4c1, r4c2 = st.columns(2)
-
-with r4c1:
-    status_counts = fdf["Status"].value_counts().reset_index()
-    status_counts.columns = ["Status", "Count"]
-    fig = px.pie(status_counts, names="Status", values="Count", title="💳 Payment Status",
-                 color_discrete_sequence=["#00b09b", "#f5576c", "#fee140"], hole=0.5)
-    fig.update_traces(textinfo="percent+label", textfont_size=13,
-                      marker=dict(line=dict(color="#fff", width=2)))
-    fig.update_layout(**CHART_LAYOUT)
-    st.plotly_chart(fig, use_container_width=True)
-
-with r4c2:
-    hotel = fdf["Do you need hotel room(s)?"].value_counts().reset_index()
-    hotel.columns = ["Hotel Needed", "Count"]
-    fig = px.pie(hotel, names="Hotel Needed", values="Count", title="🏨 Hotel Room Requests",
-                 color_discrete_sequence=COLORS, hole=0.5)
-    fig.update_traces(textinfo="percent+label", textfont_size=13,
-                      marker=dict(line=dict(color="#fff", width=2)))
-    fig.update_layout(**CHART_LAYOUT)
+with r2c3:
+    state_counts = fdf["Address (State)"].value_counts().reset_index()
+    state_counts.columns = ["State", "Count"]
+    fig = px.choropleth(state_counts, locations="State", locationmode="USA-states",
+                        color="Count", scope="usa", title="🗺️ By State",
+                        color_continuous_scale=["#e0e7ff", "#667eea", "#302b63"])
+    fig.update_layout(**CHART_LAYOUT, geo=dict(bgcolor="rgba(0,0,0,0)", lakecolor="rgba(0,0,0,0)"),
+                      coloraxis_showscale=False)
     st.plotly_chart(fig, use_container_width=True)
 
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
-# --- Row 5 ---
-r5c1, r5c2 = st.columns(2)
+# --- Row 3: Payment + Hotel + Airport ---
+r3c1, r3c2, r3c3 = st.columns(3)
 
-with r5c1:
-    pickup = fdf["Do you need airport pickup?"].value_counts().reset_index()
-    pickup.columns = ["Pickup", "Count"]
-    fig = px.bar(pickup, x="Pickup", y="Count", title="✈️ Airport Pickup Requests",
-                 color="Pickup", color_discrete_sequence=COLORS, text_auto=True)
-    fig.update_traces(marker_line_width=0, textposition="outside")
-    fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
+with r3c1:
+    status_counts = fdf["Status"].value_counts().reset_index()
+    status_counts.columns = ["Status", "Count"]
+    fig = px.pie(status_counts, names="Status", values="Count", title="💳 Payment",
+                 color_discrete_sequence=["#00b09b", "#f5576c", "#fee140"], hole=0.55)
+    fig.update_traces(textinfo="percent+label", textfont_size=11,
+                      marker=dict(line=dict(color="#1a1a2e", width=2)))
+    fig.update_layout(**CHART_LAYOUT)
     st.plotly_chart(fig, use_container_width=True)
 
-with r5c2:
-    dropoff = fdf["Do you need airport drop off?"].value_counts().reset_index()
-    dropoff.columns = ["Drop Off", "Count"]
-    fig = px.bar(dropoff, x="Drop Off", y="Count", title="🛫 Airport Drop Off Requests",
-                 color="Drop Off", color_discrete_sequence=COLORS, text_auto=True)
+with r3c2:
+    hotel = fdf["Do you need hotel room(s)?"].value_counts().reset_index()
+    hotel.columns = ["Hotel Needed", "Count"]
+    fig = px.pie(hotel, names="Hotel Needed", values="Count", title="🏨 Hotel",
+                 color_discrete_sequence=COLORS, hole=0.55)
+    fig.update_traces(textinfo="percent+label", textfont_size=11,
+                      marker=dict(line=dict(color="#1a1a2e", width=2)))
+    fig.update_layout(**CHART_LAYOUT)
+    st.plotly_chart(fig, use_container_width=True)
+
+with r3c3:
+    pickup = fdf["Do you need airport pickup?"].value_counts().reset_index()
+    pickup.columns = ["Pickup", "Count"]
+    fig = px.bar(pickup, x="Pickup", y="Count", title="✈️ Airport Pickup",
+                 color="Pickup", color_discrete_sequence=COLORS, text_auto=True)
     fig.update_traces(marker_line_width=0, textposition="outside")
     fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
     st.plotly_chart(fig, use_container_width=True)

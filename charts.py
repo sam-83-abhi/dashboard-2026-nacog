@@ -178,7 +178,7 @@ def render_row5(fdf):
             fig = px.pie(rc, names="Room Type", values="Count", title="🛏️ Room Preference",
                          color_discrete_sequence=COLORS, hole=0.55)
             fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
-            fig.update_layout(**CHART_LAYOUT, legend=dict(font=dict(color="#ffffff")))
+            fig.update_layout(**CHART_LAYOUT)
         else:
             fig = go.Figure()
             fig.update_layout(**CHART_LAYOUT, title="🛏️ Room Preference",

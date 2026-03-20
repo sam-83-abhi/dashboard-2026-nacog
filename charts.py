@@ -97,17 +97,18 @@ def render_row2(fdf):
         fig.update_layout(**CHART_LAYOUT, geo=dict(bgcolor="rgba(0,0,0,0)", lakecolor="rgba(0,0,0,0)"), coloraxis_showscale=False)
         st.plotly_chart(fig, use_container_width=True)
 
-def render_row3(fdf):
-    r3c1, r3c2, r3c3 = st.columns(3)
-    with r3c1:
-        sc = fdf["Status"].value_counts().reset_index()
-        sc.columns = ["Status", "Count"]
-        fig = px.pie(sc, names="Status", values="Count", title="💳 Payment",
-                     color_discrete_sequence=["#00b09b", "#f5576c", "#fee140"], hole=0.55)
-        fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
-        fig.update_layout(**CHART_LAYOUT)
-        st.plotly_chart(fig, use_container_width=True)
-    with r3c2:
+def render_payment(fdf):
+    sc = fdf["Status"].value_counts().reset_index()
+    sc.columns = ["Status", "Count"]
+    fig = px.pie(sc, names="Status", values="Count", title="💳 Payment",
+                 color_discrete_sequence=["#00b09b", "#f5576c", "#fee140"], hole=0.55)
+    fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
+    fig.update_layout(**CHART_LAYOUT)
+    st.plotly_chart(fig, use_container_width=True)
+
+def render_hotel(fdf):
+    c1, c2, c3 = st.columns(3)
+    with c1:
         h = fdf["Do you need hotel room(s)?"].fillna("Unknown").value_counts().reset_index()
         h.columns = ["Hotel Needed", "Count"]
         fig = px.pie(h, names="Hotel Needed", values="Count", title="🏨 Hotel",
@@ -115,14 +116,45 @@ def render_row3(fdf):
         fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
-    with r3c3:
-        p = fdf["Do you need airport pickup?"].fillna("Unknown").value_counts().reset_index()
-        p.columns = ["Pickup", "Count"]
-        fig = px.bar(p, x="Pickup", y="Count", title="✈️ Airport Pickup", color="Pickup",
-                     color_discrete_sequence=COLORS, text_auto=True)
-        fig.update_traces(marker_line_width=0, textposition="outside")
-        fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
+    with c2:
+        night_cols = [c for c in fdf.columns if c.startswith("Nights Staying in the Hotel")]
+        nights = {c.split("(")[-1].replace(")", "").strip(): (fdf[c] == "Yes").sum() for c in night_cols}
+        ndf = pd.DataFrame(list(nights.items()), columns=["Night", "Bookings"])
+        ndf = ndf[ndf["Bookings"] > 0]
+        if len(ndf) > 0:
+            fig = px.bar(ndf, x="Night", y="Bookings", title="🌙 Hotel Nights",
+                         color="Bookings", color_continuous_scale=["#667eea", "#f5576c"], text_auto=True)
+            fig.update_traces(textposition="outside")
+            fig.update_layout(**CHART_LAYOUT, showlegend=False, coloraxis_showscale=False)
+        else:
+            fig = go.Figure()
+            fig.update_layout(**CHART_LAYOUT, title="🌙 Hotel Nights",
+                              annotations=[dict(text="No data", showarrow=False, font=dict(size=16, color="#667eea"))])
         st.plotly_chart(fig, use_container_width=True)
+    with c3:
+        rp = fdf["Room 1 Preference"].dropna()
+        rp = rp[rp.str.strip() != ""]
+        if len(rp) > 0:
+            rc = rp.value_counts().reset_index()
+            rc.columns = ["Room Type", "Count"]
+            fig = px.pie(rc, names="Room Type", values="Count", title="🛏️ Room Preference",
+                         color_discrete_sequence=COLORS, hole=0.55)
+            fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
+            fig.update_layout(**CHART_LAYOUT)
+        else:
+            fig = go.Figure()
+            fig.update_layout(**CHART_LAYOUT, title="🛏️ Room Preference",
+                              annotations=[dict(text="No data", showarrow=False, font=dict(size=16, color="#667eea"))])
+        st.plotly_chart(fig, use_container_width=True)
+
+def render_travel(fdf):
+    p = fdf["Do you need airport pickup?"].fillna("Unknown").value_counts().reset_index()
+    p.columns = ["Pickup", "Count"]
+    fig = px.bar(p, x="Pickup", y="Count", title="✈️ Airport Pickup", color="Pickup",
+                 color_discrete_sequence=COLORS, text_auto=True)
+    fig.update_traces(marker_line_width=0, textposition="outside")
+    fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
+    st.plotly_chart(fig, use_container_width=True)
 
 def render_row4(fdf):
     r4c1, r4c2 = st.columns(2)
@@ -152,39 +184,6 @@ def render_row4(fdf):
         else:
             fig = go.Figure()
             fig.update_layout(**CHART_LAYOUT, title="⛪ Top Churches",
-                              annotations=[dict(text="No data", showarrow=False, font=dict(size=16, color="#667eea"))])
-        st.plotly_chart(fig, use_container_width=True)
-
-def render_row5(fdf):
-    r5c1, r5c2 = st.columns(2)
-    with r5c1:
-        night_cols = [c for c in fdf.columns if c.startswith("Nights Staying in the Hotel")]
-        nights = {c.split("(")[-1].replace(")", "").strip(): (fdf[c] == "Yes").sum() for c in night_cols}
-        ndf = pd.DataFrame(list(nights.items()), columns=["Night", "Bookings"])
-        ndf = ndf[ndf["Bookings"] > 0]
-        if len(ndf) > 0:
-            fig = px.bar(ndf, x="Night", y="Bookings", title="🌙 Hotel Nights",
-                         color="Bookings", color_continuous_scale=["#667eea", "#f5576c"], text_auto=True)
-            fig.update_traces(textposition="outside")
-            fig.update_layout(**CHART_LAYOUT, showlegend=False, coloraxis_showscale=False)
-        else:
-            fig = go.Figure()
-            fig.update_layout(**CHART_LAYOUT, title="🌙 Hotel Nights",
-                              annotations=[dict(text="No data", showarrow=False, font=dict(size=16, color="#667eea"))])
-        st.plotly_chart(fig, use_container_width=True)
-    with r5c2:
-        rp = fdf["Room 1 Preference"].dropna()
-        rp = rp[rp.str.strip() != ""]
-        if len(rp) > 0:
-            rc = rp.value_counts().reset_index()
-            rc.columns = ["Room Type", "Count"]
-            fig = px.pie(rc, names="Room Type", values="Count", title="🛏️ Room Preference",
-                         color_discrete_sequence=COLORS, hole=0.55)
-            fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
-            fig.update_layout(**CHART_LAYOUT)
-        else:
-            fig = go.Figure()
-            fig.update_layout(**CHART_LAYOUT, title="🛏️ Room Preference",
                               annotations=[dict(text="No data", showarrow=False, font=dict(size=16, color="#667eea"))])
         st.plotly_chart(fig, use_container_width=True)
 

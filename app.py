@@ -3,8 +3,9 @@ import pandas as pd
 from auth import check_password
 from styles import apply_styles
 from data_loader import get_data
-from charts import (render_kpis, render_row1, render_row2, render_row3,
-                    render_row4, render_row5, render_airport, render_table)
+from charts import (render_kpis, render_row1, render_row2, render_payment,
+                    render_hotel, render_travel, render_airport,
+                    render_row4, render_table)
 
 st.set_page_config(page_title="NACOG 2026 Dashboard", layout="wide", page_icon="🎉")
 
@@ -44,19 +45,29 @@ with st.sidebar:
 fdf = df[df["Status"].isin(statuses) & df["Ticket Level"].isin(ticket_levels) & df["Gender"].isin(genders)]
 
 # Render dashboard
+section = '<h2 style="color:#ffffff;margin:25px 0 10px;border-left:4px solid #667eea;padding-left:12px;">{}</h2>'
 divider = '<div class="section-divider"></div>'
 
 render_kpis(fdf)
-st.markdown(divider, unsafe_allow_html=True)
+
+st.markdown(section.format("📊 Registration Overview"), unsafe_allow_html=True)
 render_row1(fdf)
-st.markdown(divider, unsafe_allow_html=True)
 render_row2(fdf)
+render_payment(fdf)
+
 st.markdown(divider, unsafe_allow_html=True)
-render_row3(fdf)
-render_row5(fdf)
+st.markdown(section.format("🏨 Hotel & Accommodation"), unsafe_allow_html=True)
+render_hotel(fdf)
+
+st.markdown(divider, unsafe_allow_html=True)
+st.markdown(section.format("✈️ Travel & Airport"), unsafe_allow_html=True)
+render_travel(fdf)
 render_airport(fdf)
+
 st.markdown(divider, unsafe_allow_html=True)
+st.markdown(section.format("🍽️ Food & Community"), unsafe_allow_html=True)
 render_row4(fdf)
+
 st.markdown(divider, unsafe_allow_html=True)
 render_table(fdf)
 

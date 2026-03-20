@@ -129,8 +129,11 @@ def render_row4(fdf):
     with r4c1:
         meal_cols = [c for c in fdf.columns if (c.lower().startswith("food: do you wish to add meal plan") or c.lower().startswith("food: do you wish to add a meal plan")) and "amount" not in c.lower()]
         meal = pd.concat([fdf[c].dropna() for c in meal_cols])
+        unknown_count = len(fdf) - len(meal)
         m = meal.value_counts().reset_index()
         m.columns = ["Meal Plan", "Count"]
+        if unknown_count > 0:
+            m = pd.concat([m, pd.DataFrame([{"Meal Plan": "Unknown", "Count": unknown_count}])], ignore_index=True)
         fig = px.pie(m, names="Meal Plan", values="Count", title="🍽️ Meal Plan",
                      color_discrete_sequence=COLORS, hole=0.55)
         fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))

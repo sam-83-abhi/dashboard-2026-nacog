@@ -153,7 +153,7 @@ def render_row4(fdf):
         st.plotly_chart(fig, use_container_width=True)
 
 def render_row5(fdf):
-    r5c1, r5c2, r5c3 = st.columns(3)
+    r5c1, r5c2 = st.columns(2)
     with r5c1:
         night_cols = [c for c in fdf.columns if c.startswith("Nights Staying in the Hotel")]
         nights = {c.split("(")[-1].replace(")", "").strip(): (fdf[c] == "Yes").sum() for c in night_cols}
@@ -183,22 +183,6 @@ def render_row5(fdf):
             fig = go.Figure()
             fig.update_layout(**CHART_LAYOUT, title="🛏️ Room Preference",
                               annotations=[dict(text="No data", showarrow=False, font=dict(size=16, color="#667eea"))])
-        st.plotly_chart(fig, use_container_width=True)
-    with r5c3:
-        children = fdf[fdf["Which sessions would you like to attend? (Childrens Session)"].eq("Yes")]
-        ca = children["Age of the Child"].dropna()
-        ca = ca[ca.str.strip() != ""]
-        if len(ca) > 0:
-            ac = ca.value_counts().reset_index()
-            ac.columns = ["Age", "Count"]
-            fig = px.bar(ac, x="Age", y="Count", title=f"👶 Children ({len(children)})", color="Age",
-                         color_discrete_sequence=COLORS, text_auto=True)
-            fig.update_traces(marker_line_width=0, textposition="outside")
-            fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
-        else:
-            fig = go.Figure()
-            fig.update_layout(**CHART_LAYOUT, title=f"👶 Children ({len(children)})",
-                              annotations=[dict(text=f"{len(children)} registered", showarrow=False, font=dict(size=16, color="#667eea"))])
         st.plotly_chart(fig, use_container_width=True)
 
 def render_airport(fdf):

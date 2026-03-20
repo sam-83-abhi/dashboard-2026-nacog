@@ -54,7 +54,7 @@ def check_password():
         .login-emoji { animation: pulse 2s ease-in-out infinite; display: inline-block; }
     </style>
     <div style="display:flex;justify-content:center;align-items:center;min-height:70vh;">
-        <div class="login-card" style="background:rgba(26,26,46,0.9);backdrop-filter:blur(12px);padding:0;border-radius:20px;
+        <div class="login-card" style="background:rgba(26,26,46,0.55);backdrop-filter:blur(8px);padding:0;border-radius:20px;
                     text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4);max-width:420px;width:100%;overflow:hidden;">
             <div style="padding:35px 40px 30px;">
                 <div class="login-emoji" style="font-size:3rem;margin-bottom:8px;">🎉</div>

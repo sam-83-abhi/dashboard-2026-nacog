@@ -107,9 +107,11 @@ st.markdown("""
     .mc-orange { background: linear-gradient(135deg, #f093fb, #f5576c); }
     .mc-pink   { background: linear-gradient(135deg, #fa709a, #fee140); }
     div[data-testid="stSidebar"] {
-        background: #0a0a1a;
+        background: #0a0a1a !important;
         border-right: 1px solid #1a1a3a;
     }
+    div[data-testid="stSidebar"] > div { background: #0a0a1a !important; }
+    section[data-testid="stSidebar"] { background: #0a0a1a !important; }
     div[data-testid="stSidebar"] * { color: #e0e0f0 !important; }
     .section-divider {
         height: 3px; border-radius: 2px; margin: 10px 0 20px;

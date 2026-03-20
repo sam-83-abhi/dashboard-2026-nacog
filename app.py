@@ -56,32 +56,18 @@ if not check_password():
 # --- Custom CSS + Animations ---
 
 # Background slideshow
+# Background slideshow
 if bg_base64:
-    keyframes = ""
-    n = len(bg_base64)
-    step = 100 / n
-    for i, img in enumerate(bg_base64):
-        start = i * step
-        mid = start + step * 0.8
-        end = (i + 1) * step
-        keyframes += f"""
-        {start:.1f}% {{ background-image: url('data:image/jpeg;base64,{img}'); opacity:1; }}
-        {mid:.1f}% {{ background-image: url('data:image/jpeg;base64,{img}'); opacity:1; }}
-        {end:.1f}% {{ opacity:0.8; }}"""
-
-    duration = n * 8  # 8 seconds per image
     st.markdown(f"""
     <style>
         .stApp::before {{
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center;
-            animation: bgSlide {duration}s infinite;
+            background: url('data:image/jpeg;base64,{bg_base64[0]}') center/cover no-repeat;
             opacity: 0.03;
             z-index: 0;
             pointer-events: none;
         }}
-        @keyframes bgSlide {{ {keyframes} }}
         .stApp > * {{ position: relative; z-index: 1; }}
         .block-container {{
             background: rgba(255,255,255,0.95);

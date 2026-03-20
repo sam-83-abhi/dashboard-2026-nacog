@@ -108,7 +108,7 @@ def render_row3(fdf):
         fig.update_layout(**CHART_LAYOUT)
         st.plotly_chart(fig, use_container_width=True)
     with r3c2:
-        h = fdf["Do you need hotel room(s)?"].value_counts().reset_index()
+        h = fdf["Do you need hotel room(s)?"].fillna("Unknown").value_counts().reset_index()
         h.columns = ["Hotel Needed", "Count"]
         fig = px.pie(h, names="Hotel Needed", values="Count", title="🏨 Hotel",
                      color_discrete_sequence=COLORS, hole=0.55)

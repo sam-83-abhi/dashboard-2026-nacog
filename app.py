@@ -192,10 +192,14 @@ COLORS = ["#667eea", "#f5576c", "#00b09b", "#fa709a", "#4facfe", "#fee140", "#96
 def load_data(file):
     df = pd.read_csv(file, encoding="utf-8-sig")
     df["Sold Date"] = pd.to_datetime(df["Sold Date"], errors="coerce")
+    df["Ticket Price ($ Amount)"] = df["Ticket Price ($ Amount)"].astype(str).str.replace("$","",regex=False).str.replace(",","",regex=False)
     df["Ticket Price ($ Amount)"] = pd.to_numeric(df["Ticket Price ($ Amount)"], errors="coerce").fillna(0)
+    df["Ticket Total ($ Amount)"] = df["Ticket Total ($ Amount)"].astype(str).str.replace("$","",regex=False).str.replace(",","",regex=False)
     df["Ticket Total ($ Amount)"] = pd.to_numeric(df["Ticket Total ($ Amount)"], errors="coerce").fillna(0)
-    df["Hotel Cost"] = pd.to_numeric(df["How many hotel rooms do you need? ($ Amount)"], errors="coerce").fillna(0)
-    df["Meal Cost"] = pd.to_numeric(df.get("Food: Do you wish to add a meal plan? ($ Amount)", pd.Series(dtype=float)), errors="coerce").fillna(0)
+    df["Hotel Cost"] = df["How many hotel rooms do you need? ($ Amount)"].astype(str).str.replace("$","",regex=False).str.replace(",","",regex=False)
+    df["Hotel Cost"] = pd.to_numeric(df["Hotel Cost"], errors="coerce").fillna(0)
+    df["Meal Cost"] = df.get("Food: Do you wish to add a meal plan? ($ Amount)", pd.Series(dtype=str)).astype(str).str.replace("$","",regex=False).str.replace(",","",regex=False)
+    df["Meal Cost"] = pd.to_numeric(df["Meal Cost"], errors="coerce").fillna(0)
     df["Full Name"] = df["Name (First Name)"].astype(str).str.strip() + " " + df["Name (Last Name)"].astype(str).str.strip()
     return df
 

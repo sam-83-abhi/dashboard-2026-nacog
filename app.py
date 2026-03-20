@@ -58,9 +58,9 @@ def check_password():
                     text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.4);max-width:420px;width:100%;overflow:hidden;">
             <div style="padding:35px 40px 30px;">
                 <div class="login-emoji" style="font-size:3rem;margin-bottom:8px;">🎉</div>
-                <h1 style="color:#e94560;margin:0 0 5px;font-size:1.8rem;">NACOG 2026</h1>
-                <p style="color:#a0a0b0;margin:0 0 5px;font-size:0.95rem;">Conference Dashboard</p>
-                <p style="color:#707090;margin:0 0 20px;font-size:0.8rem;">📍 Denver, Colorado</p>
+                <h1 style="color:#ff4d6d;margin:0 0 5px;font-size:2rem;font-weight:700;">NACOG 2026</h1>
+                <p style="color:#e0e0f0;margin:0 0 5px;font-size:1.1rem;font-weight:600;">Conference Dashboard</p>
+                <p style="color:#c0c0d0;margin:0 0 20px;font-size:0.9rem;">📍 Denver, Colorado</p>
             </div>
         </div>
     </div>
@@ -113,6 +113,10 @@ st.markdown("""
     div[data-testid="stSidebar"] > div { background: #0a0a1a !important; }
     section[data-testid="stSidebar"] { background: #0a0a1a !important; }
     div[data-testid="stSidebar"] * { color: #e0e0f0 !important; }
+    div[data-testid="stSidebar"] button { background: #667eea !important; color: #fff !important; border: none !important; }
+    div[data-testid="stSidebar"] button:hover { background: #764ba2 !important; }
+    div[data-testid="stSidebar"] .stFileUploader label { color: #ffffff !important; font-weight: 600 !important; }
+    div[data-testid="stSidebar"] h5 { color: #ffffff !important; }
     .section-divider {
         height: 3px; border-radius: 2px; margin: 10px 0 20px;
         background: linear-gradient(90deg, #667eea, #764ba2, #f5576c, #fee140);
@@ -167,8 +171,9 @@ with st.sidebar:
     ticket_levels = st.multiselect("🎫 Ticket Level", df["Ticket Level"].dropna().unique(), default=df["Ticket Level"].dropna().unique())
     genders = st.multiselect("👤 Gender", df["Gender"].dropna().unique(), default=df["Gender"].dropna().unique())
     st.markdown("---")
-    st.markdown("##### 📥 Data Update")
-    if st.button("Load Latest Registrations", use_container_width=True):
+    st.markdown("##### 📥 Data Update"
+               , unsafe_allow_html=False)
+    if st.button("🔄 Load Latest Registrations", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
 

@@ -87,7 +87,7 @@ st.markdown("""
 
 COLORS = ["#667eea", "#f5576c", "#00b09b", "#fa709a", "#4facfe", "#fee140", "#96c93d", "#764ba2"]
 
-@st.cache_data
+@st.cache_data(ttl=3600)
 def load_data():
     df = pd.read_csv("GeneralRegistration.csv", encoding="utf-8-sig")
     df["Sold Date"] = pd.to_datetime(df["Sold Date"], errors="coerce")
@@ -128,8 +128,8 @@ with st.sidebar:
     ticket_levels = st.multiselect("🎫 Ticket Level", df["Ticket Level"].dropna().unique(), default=df["Ticket Level"].dropna().unique())
     genders = st.multiselect("👤 Gender", df["Gender"].dropna().unique(), default=df["Gender"].dropna().unique())
     st.markdown("---")
-    st.markdown("##### 🔄 Refresh")
-    if st.button("Clear Cache & Reload", use_container_width=True):
+    st.markdown("##### 📥 Data Update")
+    if st.button("Load Latest Registrations", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
 

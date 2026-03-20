@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import base64, pathlib
+import base64, pathlib, os
+from datetime import datetime
 
 def img_to_base64(path):
     return base64.b64encode(pathlib.Path(path).read_bytes()).decode()
@@ -167,6 +168,7 @@ def load_data():
     return df
 
 df = load_data()
+csv_modified = datetime.fromtimestamp(os.path.getmtime("GeneralRegistration.csv")).strftime("%B %d, %Y at %I:%M %p")
 
 # --- Header with Denver Banner ---
 st.markdown(f"""
@@ -181,7 +183,7 @@ st.markdown(f"""
                 🎉 NACOG 2026 Conference
             </h1>
             <p style="color:#c0c0e0;margin:8px 0 0;font-size:1.05rem;">
-                📍 Denver, Colorado &nbsp;•&nbsp; 📊 {len(df)} registrations
+                📍 Denver, Colorado &nbsp;•&nbsp; 📊 {len(df)} registrations &nbsp;•&nbsp; 🕐 Data updated: {csv_modified}
             </p>
         </div>
     </div>

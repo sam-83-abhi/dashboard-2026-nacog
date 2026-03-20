@@ -68,6 +68,14 @@ def apply_styles():
         [data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] { background:#667eea !important; }
         [data-testid="stSidebar"] [data-baseweb="select"] * { color:#ffffff !important; }
 
+        /* Dropdown menu styling */
+        [data-baseweb="popover"], [data-baseweb="menu"] { background:#1a1a3a !important; border:1px solid #667eea !important; }
+        [data-baseweb="popover"] li, [data-baseweb="menu"] li { color:#ffffff !important; }
+        [data-baseweb="popover"] li:hover, [data-baseweb="menu"] li:hover { background:#667eea !important; }
+        [data-baseweb="popover"] li[aria-selected="true"], [data-baseweb="menu"] li[aria-selected="true"] { background:#764ba2 !important; }
+        [data-baseweb="select"] [data-baseweb="tag"] { background:#667eea !important; color:#ffffff !important; }
+        [data-baseweb="input"] { background:#1a1a3a !important; color:#ffffff !important; }
+
         .section-divider { height:3px; border-radius:2px; margin:10px 0 20px; background:linear-gradient(90deg,#667eea,#764ba2,#f5576c,#fee140); }
 
         .reg-table { width:100%; border-collapse:collapse; font-size:0.85rem; }

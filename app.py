@@ -21,7 +21,7 @@ latest_entry = df["Sold Date"].max().strftime("%B %d, %Y") if pd.notna(df["Sold 
 st.markdown(f"""
 <div style="background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
             padding:35px;border-radius:18px;margin-bottom:25px;box-shadow:0 10px 40px rgba(0,0,0,0.25);">
-    <h1 style="color:#fff;font-size:2.4rem;margin:0;">🎉 NACOG 2026 Conference</h1>
+    <h1 style="color:#fff;font-size:2.4rem;margin:0;">🎉 NACOG 2026 Conference Dashboard</h1>
     <p style="color:#c0c0e0;margin:8px 0 0;font-size:1.05rem;">
         📍 Denver, Colorado &nbsp;•&nbsp; 📊 {len(df)} registrations &nbsp;•&nbsp; 🕐 Data as of: {latest_entry}
     </p>

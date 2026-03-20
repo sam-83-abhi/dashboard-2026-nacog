@@ -2,6 +2,12 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import base64, pathlib
+
+def img_to_base64(path):
+    return base64.b64encode(pathlib.Path(path).read_bytes()).decode()
+
+PICS = {k: img_to_base64(f"pics/{k}.jpg") for k in ["denver_skyline","downtown","mountains","capitol","sunset","conference"]}
 
 st.set_page_config(page_title="NACOG 2026 Dashboard", layout="wide", page_icon="🎉")
 
@@ -11,11 +17,11 @@ def check_password():
         st.session_state.authenticated = False
     if st.session_state.authenticated:
         return True
-    st.markdown("""
+    st.markdown(f"""
     <div style="display:flex;justify-content:center;align-items:center;min-height:60vh;">
         <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:0;border-radius:20px;
                     text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:420px;width:100%;overflow:hidden;">
-            <img src="https://images.unsplash.com/photo-1619856699906-09e1f4ef578c?w=800&h=200&fit=crop&crop=bottom"
+            <img src="data:image/jpeg;base64,{PICS['denver_skyline']}"
                  style="width:100%;height:140px;object-fit:cover;display:block;" alt="Denver"/>
             <div style="padding:30px 40px 40px;">
                 <h1 style="color:#e94560;margin:0 0 5px;font-size:1.8rem;">NACOG 2026</h1>
@@ -98,7 +104,7 @@ df = load_data()
 st.markdown(f"""
 <div style="position:relative;border-radius:18px;overflow:hidden;margin-bottom:25px;
             box-shadow:0 10px 40px rgba(0,0,0,0.25);">
-    <img src="https://images.unsplash.com/photo-1619856699906-09e1f4ef578c?w=1400&h=350&fit=crop&crop=bottom"
+    <img src="data:image/jpeg;base64,{PICS['denver_skyline']}"
          style="width:100%;height:220px;object-fit:cover;display:block;" alt="Denver Skyline"/>
     <div style="position:absolute;top:0;left:0;width:100%;height:100%;
                 background:linear-gradient(to right,rgba(15,12,41,0.85),rgba(48,43,99,0.6),rgba(36,36,62,0.4));">
@@ -203,34 +209,34 @@ with r2c2:
     st.plotly_chart(fig, use_container_width=True)
 
 # --- Denver Photo Gallery ---
-st.markdown("""
+st.markdown(f"""
 <div style="display:flex;gap:12px;margin-bottom:20px;">
     <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
-        <img src="https://images.unsplash.com/photo-1546156929-a4c0ac411f47?w=600&h=250&fit=crop"
+        <img src="data:image/jpeg;base64,{PICS['downtown']}"
              style="width:100%;height:180px;object-fit:cover;" alt="Denver Downtown"/>
         <div style="padding:10px 14px;background:linear-gradient(135deg,#1a1a2e,#302b63);">
             <p style="color:#fff;margin:0;font-size:0.85rem;">🏙️ Downtown Denver</p>
         </div>
     </div>
     <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
-        <img src="https://images.unsplash.com/photo-1602800846364-7e0e0e8b3b0e?w=600&h=250&fit=crop"
+        <img src="data:image/jpeg;base64,{PICS['mountains']}"
              style="width:100%;height:180px;object-fit:cover;" alt="Rocky Mountains"/>
         <div style="padding:10px 14px;background:linear-gradient(135deg,#11998e,#38ef7d);">
             <p style="color:#fff;margin:0;font-size:0.85rem;">🏔️ Rocky Mountains</p>
         </div>
     </div>
     <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
-        <img src="https://images.unsplash.com/photo-1570824104453-508955ab713e?w=600&h=250&fit=crop"
+        <img src="data:image/jpeg;base64,{PICS['capitol']}"
              style="width:100%;height:180px;object-fit:cover;" alt="Colorado State Capitol"/>
         <div style="padding:10px 14px;background:linear-gradient(135deg,#667eea,#764ba2);">
             <p style="color:#fff;margin:0;font-size:0.85rem;">🏛️ Colorado Capitol</p>
         </div>
     </div>
     <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
-        <img src="https://images.unsplash.com/photo-1515861461-74bbf311e5c6?w=600&h=250&fit=crop"
+        <img src="data:image/jpeg;base64,{PICS['sunset']}"
              style="width:100%;height:180px;object-fit:cover;" alt="Denver Sunset"/>
         <div style="padding:10px 14px;background:linear-gradient(135deg,#f5576c,#fa709a);">
-            <p style="color:#fff;margin:0;font-size:0.85rem;">🌅 Denver Sunset</p>
+            <p style="color:#fff;margin:0;font-size:0.85rem;">🌅 Colorado Sunset</p>
         </div>
     </div>
 </div>
@@ -325,11 +331,11 @@ st.dataframe(
 )
 
 # --- Footer ---
-st.markdown("""
+st.markdown(f"""
 <div style="position:relative;border-radius:16px;overflow:hidden;margin-top:20px;
             box-shadow:0 6px 20px rgba(0,0,0,0.12);">
-    <img src="https://images.unsplash.com/photo-1546156929-a4c0ac411f47?w=1400&h=200&fit=crop&crop=top"
-         style="width:100%;height:120px;object-fit:cover;display:block;" alt="Denver"/>
+    <img src="data:image/jpeg;base64,{PICS['conference']}"
+         style="width:100%;height:120px;object-fit:cover;display:block;" alt="Conference"/>
     <div style="position:absolute;top:0;left:0;width:100%;height:100%;
                 background:rgba(15,12,41,0.75);display:flex;align-items:center;justify-content:center;">
         <p style="color:#c0c0e0;font-size:0.85rem;margin:0;">

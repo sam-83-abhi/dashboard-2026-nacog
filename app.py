@@ -114,28 +114,46 @@ st.markdown("""
     .mc-blue   { background: linear-gradient(135deg, #4facfe, #00f2fe); }
     .mc-orange { background: linear-gradient(135deg, #f093fb, #f5576c); }
     .mc-pink   { background: linear-gradient(135deg, #fa709a, #fee140); }
-    div[data-testid="stSidebar"] {
+    div[data-testid="stSidebar"],
+    div[data-testid="stSidebar"] > div,
+    section[data-testid="stSidebar"],
+    section[data-testid="stSidebar"] > div {
         background: #0a0a1a !important;
         border-right: 1px solid #1a1a3a;
     }
-    div[data-testid="stSidebar"] > div { background: #0a0a1a !important; }
-    section[data-testid="stSidebar"] { background: #0a0a1a !important; }
-    div[data-testid="stSidebar"] * { color: #ffffff !important; }
-    div[data-testid="stSidebar"] button {
+    /* Sidebar - every single element white */
+    div[data-testid="stSidebar"] *,
+    section[data-testid="stSidebar"] *,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] div,
+    [data-testid="stSidebar"] small,
+    [data-testid="stSidebar"] button span,
+    [data-testid="stSidebar"] [data-baseweb] *,
+    [data-testid="stSidebar"] [role="button"],
+    [data-testid="stSidebar"] svg { color: #ffffff !important; fill: #ffffff !important; }
+
+    [data-testid="stSidebar"] button {
         background: #667eea !important; color: #ffffff !important;
-        border: none !important; font-weight: 600 !important; font-size: 0.95rem !important;
+        border: 2px solid #764ba2 !important; font-weight: 700 !important;
+        font-size: 1rem !important; padding: 10px !important;
     }
-    div[data-testid="stSidebar"] button:hover { background: #764ba2 !important; }
-    div[data-testid="stSidebar"] .stFileUploader label { color: #ffffff !important; font-weight: 600 !important; font-size: 0.95rem !important; }
-    div[data-testid="stSidebar"] .stFileUploader span { color: #ffffff !important; }
-    div[data-testid="stSidebar"] .stFileUploader small { color: #c0c0e0 !important; }
-    div[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
-        background: rgba(102,126,234,0.15) !important;
+    [data-testid="stSidebar"] button:hover { background: #764ba2 !important; }
+    [data-testid="stSidebar"] button span { color: #ffffff !important; }
+
+    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] {
+        background: rgba(102,126,234,0.2) !important;
         border: 2px dashed #667eea !important;
-        color: #ffffff !important;
     }
-    div[data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] * { color: #ffffff !important; }
-    div[data-testid="stSidebar"] h5 { color: #ffffff !important; font-size: 1rem !important; }
+    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] * { color: #ffffff !important; }
+    [data-testid="stSidebar"] [data-testid="stFileUploaderDropzone"] button {
+        background: #f5576c !important; border: none !important;
+    }
+
+    [data-testid="stSidebar"] h5 { color: #ffffff !important; font-size: 1.1rem !important; }
+    [data-testid="stSidebar"] .stMultiSelect [data-baseweb="tag"] { background: #667eea !important; }
+    [data-testid="stSidebar"] [data-baseweb="select"] * { color: #ffffff !important; }
     .section-divider {
         height: 3px; border-radius: 2px; margin: 10px 0 20px;
         background: linear-gradient(90deg, #667eea, #764ba2, #f5576c, #fee140);

@@ -103,6 +103,15 @@ st.markdown("""
     [data-testid="stTable"] { color: #ffffff !important; }
     .stAlert p { color: #ffffff !important; }
 
+    /* All input fields */
+    .stTextInput input, .stTextArea textarea {
+        color: #ffffff !important;
+        background: #1a1a3a !important;
+        border: 1px solid #667eea !important;
+        caret-color: #ffffff !important;
+    }
+    .stTextInput input::placeholder { color: #a0a0c0 !important; }
+
     /* Dataframe / Table */
     [data-testid="stDataFrame"] * { color: #ffffff !important; }
     [data-testid="stDataFrame"] input { color: #ffffff !important; background: #1a1a3a !important; border: 1px solid #667eea !important; }

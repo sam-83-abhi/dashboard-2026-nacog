@@ -69,7 +69,7 @@ def check_password():
                     box-shadow:0 25px 70px rgba(0,0,0,0.5);max-width:440px;width:100%;
                     border:1px solid rgba(102,126,234,0.2);overflow:hidden;">
             <div style="padding:40px 45px 10px;">
-                <div class="login-emoji" style="font-size:3.5rem;margin-bottom:12px;">🎉</div>
+                <div class="login-emoji" style="font-size:3.5rem;margin-bottom:12px;">📊</div>
                 <h1 class="shimmer-title" style="margin:0 0 6px;font-size:2.2rem;font-weight:800;">NACOG 2026</h1>
                 <p class="shimmer-sub" style="margin:0 0 8px;font-size:1.15rem;font-weight:600;letter-spacing:2px;">✦ Conference Dashboard ✦</p>
                 <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0 5px;animation:float 4s ease-in-out infinite;">

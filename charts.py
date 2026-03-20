@@ -91,6 +91,7 @@ def render_demographics(fdf):
     with c3:
         a = fdf["Age Group"].fillna("Unknown").value_counts().reset_index()
         a.columns = ["Age Group", "Count"]
+        a = pd.concat([a[a["Age Group"] != "Unknown"], a[a["Age Group"] == "Unknown"]])
         fig = px.bar(a, x="Count", y="Age Group", title="📊 Age Groups", color="Age Group",
                      color_discrete_sequence=COLORS, text_auto=True, orientation="h")
         fig.update_traces(marker_line_width=0, textposition="outside")
@@ -111,6 +112,7 @@ def render_hotel(fdf):
     with c1:
         h = fdf["Do you need hotel room(s)?"].fillna("Unknown").value_counts().reset_index()
         h.columns = ["Hotel Needed", "Count"]
+        h = pd.concat([h[h["Hotel Needed"] != "Unknown"], h[h["Hotel Needed"] == "Unknown"]])
         fig = px.pie(h, names="Hotel Needed", values="Count", title="🏨 Hotel",
                      color_discrete_sequence=COLORS, hole=0.55)
         fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
@@ -150,6 +152,7 @@ def render_hotel(fdf):
 def render_travel(fdf):
     p = fdf["Do you need airport pickup?"].fillna("Unknown").value_counts().reset_index()
     p.columns = ["Pickup", "Count"]
+    p = pd.concat([p[p["Pickup"] != "Unknown"], p[p["Pickup"] == "Unknown"]])
     fig = px.bar(p, x="Pickup", y="Count", title="✈️ Airport Pickup", color="Pickup",
                  color_discrete_sequence=COLORS, text_auto=True)
     fig.update_traces(marker_line_width=0, textposition="outside")

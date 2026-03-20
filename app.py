@@ -62,10 +62,6 @@ st.markdown(section.format("👥 Demographics"), unsafe_allow_html=True)
 render_demographics(fdf)
 
 st.markdown(divider, unsafe_allow_html=True)
-st.markdown(section.format("💳 Payment"), unsafe_allow_html=True)
-render_payment(fdf)
-
-st.markdown(divider, unsafe_allow_html=True)
 st.markdown(section.format("🏨 Hotel & Accommodation"), unsafe_allow_html=True)
 render_hotel(fdf)
 
@@ -81,6 +77,10 @@ render_food(fdf)
 st.markdown(divider, unsafe_allow_html=True)
 st.markdown(section.format("⛪ Community"), unsafe_allow_html=True)
 render_community(fdf)
+
+st.markdown(divider, unsafe_allow_html=True)
+st.markdown(section.format("💳 Payment"), unsafe_allow_html=True)
+render_payment(fdf)
 
 st.markdown(divider, unsafe_allow_html=True)
 st.markdown(section.format("📋 Registrant Details"), unsafe_allow_html=True)

@@ -90,11 +90,23 @@ def load_data():
 
 df = load_data()
 
-# --- Header ---
+# --- Header with Denver Banner ---
 st.markdown(f"""
-<div class="dash-header">
-    <h1>🎉 NACOG 2026 Conference Dashboard</h1>
-    <p>📊 {len(df)} registrations • Live data from GeneralRegistration.csv</p>
+<div style="position:relative;border-radius:18px;overflow:hidden;margin-bottom:25px;
+            box-shadow:0 10px 40px rgba(0,0,0,0.25);">
+    <img src="https://images.unsplash.com/photo-1619856699906-09e1f4ef578c?w=1400&h=350&fit=crop&crop=bottom"
+         style="width:100%;height:220px;object-fit:cover;display:block;" alt="Denver Skyline"/>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;
+                background:linear-gradient(to right,rgba(15,12,41,0.85),rgba(48,43,99,0.6),rgba(36,36,62,0.4));">
+        <div style="padding:45px 35px;">
+            <h1 style="color:#fff;font-size:2.4rem;margin:0;text-shadow:0 2px 10px rgba(0,0,0,0.3);">
+                🎉 NACOG 2026 Conference
+            </h1>
+            <p style="color:#c0c0e0;margin:8px 0 0;font-size:1.05rem;">
+                📍 Denver, Colorado &nbsp;•&nbsp; 📊 {len(df)} registrations
+            </p>
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 

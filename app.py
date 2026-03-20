@@ -13,13 +13,39 @@ def check_password():
     if st.session_state.authenticated:
         return True
     st.markdown("""
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .login-card {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4) !important;
+            transition: all 0.3s;
+        }
+        .login-emoji {
+            animation: pulse 2s ease-in-out infinite;
+            display: inline-block;
+        }
+    </style>
     <div style="display:flex;justify-content:center;align-items:center;min-height:60vh;">
-        <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:50px 40px;border-radius:20px;
-                    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:420px;width:100%;">
-            <div style="font-size:3.5rem;margin-bottom:10px;">🎉</div>
-            <h1 style="color:#e94560;margin:0 0 5px;font-size:1.8rem;">NACOG 2026</h1>
-            <p style="color:#a0a0b0;margin:0 0 5px;font-size:0.95rem;">Conference Dashboard</p>
-            <p style="color:#707090;margin:0 0 25px;font-size:0.8rem;">📍 Denver, Colorado</p>
+        <div class="login-card" style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:0;border-radius:20px;
+                    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:420px;width:100%;overflow:hidden;">
+            <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&w=800"
+                 style="width:100%;height:160px;object-fit:cover;display:block;" alt="Denver Mountains"/>
+            <div style="padding:25px 40px 35px;">
+                <div class="login-emoji" style="font-size:3rem;margin-bottom:8px;">🎉</div>
+                <h1 style="color:#e94560;margin:0 0 5px;font-size:1.8rem;">NACOG 2026</h1>
+                <p style="color:#a0a0b0;margin:0 0 5px;font-size:0.95rem;">Conference Dashboard</p>
+                <p style="color:#707090;margin:0 0 20px;font-size:0.8rem;">📍 Denver, Colorado</p>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)

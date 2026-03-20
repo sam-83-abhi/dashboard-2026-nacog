@@ -49,10 +49,10 @@ def render_row1(fdf):
     with r1c2:
         lc = fdf["Ticket Level"].value_counts().reset_index()
         lc.columns = ["Ticket Level", "Count"]
-        fig = px.pie(lc, names="Ticket Level", values="Count", title="🎫 Ticket Level",
-                     color_discrete_sequence=COLORS, hole=0.55)
-        fig.update_traces(textinfo="value+label", textfont_size=11, textfont_color="#ffffff", marker=dict(line=dict(color="#1a1a2e", width=2)))
-        fig.update_layout(**CHART_LAYOUT)
+        fig = px.bar(lc, x="Ticket Level", y="Count", title="🎫 Ticket Level",
+                     color="Ticket Level", color_discrete_sequence=COLORS, text_auto=True)
+        fig.update_traces(marker_line_width=0, textposition="outside")
+        fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.4)
         st.plotly_chart(fig, use_container_width=True)
     with r1c3:
         g = fdf["Gender"].value_counts().reset_index()

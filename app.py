@@ -86,14 +86,22 @@ st.markdown("""
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
     .block-container { padding-top: 1.5rem; }
 
-    /* Dark theme */
+    /* Dark theme - force all text white */
     .stApp { background-color: #0a0a1a; }
-    .stApp, .stApp p, .stApp span, .stApp label, .stApp div { color: #e0e0f0 !important; }
-    .stMarkdown, .stMarkdown p { color: #e0e0f0 !important; }
+    .stApp, .stApp p, .stApp span, .stApp label, .stApp div,
+    .stApp li, .stApp td, .stApp th, .stApp caption,
+    .stApp input, .stApp textarea, .stApp select,
+    .stMarkdown, .stMarkdown p, .stMarkdown span,
+    [data-testid="stMarkdownContainer"] p,
+    [data-testid="stMarkdownContainer"] span,
+    [data-testid="stMetricValue"], [data-testid="stMetricLabel"],
+    [data-testid="stMetricDelta"], .stDataFrame,
+    .stSelectbox label, .stMultiSelect label,
+    .stFileUploader label, .stTextInput label { color: #ffffff !important; }
     h1, h2, h3, h4, h5, h6 { color: #ffffff !important; }
-
-    /* Dataframe */
-    .stDataFrame { background: #12122a; border-radius: 12px; }
+    .stDataFrame td, .stDataFrame th { color: #ffffff !important; }
+    [data-testid="stTable"] { color: #ffffff !important; }
+    .stAlert p { color: #ffffff !important; }
 
     .metric-card {
         padding: 22px 18px; border-radius: 16px; color: white; text-align: center;

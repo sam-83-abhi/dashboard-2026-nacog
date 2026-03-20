@@ -13,11 +13,15 @@ def check_password():
         return True
     st.markdown("""
     <div style="display:flex;justify-content:center;align-items:center;min-height:60vh;">
-        <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:50px 40px;border-radius:20px;
-                    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:420px;width:100%;">
-            <div style="font-size:3.5rem;margin-bottom:10px;">🔒</div>
-            <h1 style="color:#e94560;margin:0 0 5px;font-size:1.8rem;">NACOG 2026</h1>
-            <p style="color:#a0a0b0;margin:0 0 30px;font-size:0.95rem;">Conference Dashboard</p>
+        <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:0;border-radius:20px;
+                    text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.3);max-width:420px;width:100%;overflow:hidden;">
+            <img src="https://images.unsplash.com/photo-1619856699906-09e1f4ef578c?w=800&h=200&fit=crop&crop=bottom"
+                 style="width:100%;height:140px;object-fit:cover;display:block;" alt="Denver"/>
+            <div style="padding:30px 40px 40px;">
+                <h1 style="color:#e94560;margin:0 0 5px;font-size:1.8rem;">NACOG 2026</h1>
+                <p style="color:#a0a0b0;margin:0 0 5px;font-size:0.95rem;">Conference Dashboard</p>
+                <p style="color:#707090;margin:0 0 25px;font-size:0.8rem;">📍 Denver, Colorado</p>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -198,6 +202,40 @@ with r2c2:
     fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.35)
     st.plotly_chart(fig, use_container_width=True)
 
+# --- Denver Photo Gallery ---
+st.markdown("""
+<div style="display:flex;gap:12px;margin-bottom:20px;">
+    <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
+        <img src="https://images.unsplash.com/photo-1546156929-a4c0ac411f47?w=600&h=250&fit=crop"
+             style="width:100%;height:180px;object-fit:cover;" alt="Denver Downtown"/>
+        <div style="padding:10px 14px;background:linear-gradient(135deg,#1a1a2e,#302b63);">
+            <p style="color:#fff;margin:0;font-size:0.85rem;">🏙️ Downtown Denver</p>
+        </div>
+    </div>
+    <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
+        <img src="https://images.unsplash.com/photo-1602800846364-7e0e0e8b3b0e?w=600&h=250&fit=crop"
+             style="width:100%;height:180px;object-fit:cover;" alt="Rocky Mountains"/>
+        <div style="padding:10px 14px;background:linear-gradient(135deg,#11998e,#38ef7d);">
+            <p style="color:#fff;margin:0;font-size:0.85rem;">🏔️ Rocky Mountains</p>
+        </div>
+    </div>
+    <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
+        <img src="https://images.unsplash.com/photo-1570824104453-508955ab713e?w=600&h=250&fit=crop"
+             style="width:100%;height:180px;object-fit:cover;" alt="Colorado State Capitol"/>
+        <div style="padding:10px 14px;background:linear-gradient(135deg,#667eea,#764ba2);">
+            <p style="color:#fff;margin:0;font-size:0.85rem;">🏛️ Colorado Capitol</p>
+        </div>
+    </div>
+    <div style="flex:1;border-radius:14px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.12);">
+        <img src="https://images.unsplash.com/photo-1515861461-74bbf311e5c6?w=600&h=250&fit=crop"
+             style="width:100%;height:180px;object-fit:cover;" alt="Denver Sunset"/>
+        <div style="padding:10px 14px;background:linear-gradient(135deg,#f5576c,#fa709a);">
+            <p style="color:#fff;margin:0;font-size:0.85rem;">🌅 Denver Sunset</p>
+        </div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown('<div class="section-divider"></div>', unsafe_allow_html=True)
 
 # --- Row 3 ---
@@ -288,7 +326,15 @@ st.dataframe(
 
 # --- Footer ---
 st.markdown("""
-<div style="text-align:center;padding:30px 0 10px;color:#888;font-size:0.8rem;">
-    NACOG 2026 Conference Dashboard • Built with ❤️ using Streamlit & Plotly
+<div style="position:relative;border-radius:16px;overflow:hidden;margin-top:20px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.12);">
+    <img src="https://images.unsplash.com/photo-1546156929-a4c0ac411f47?w=1400&h=200&fit=crop&crop=top"
+         style="width:100%;height:120px;object-fit:cover;display:block;" alt="Denver"/>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;
+                background:rgba(15,12,41,0.75);display:flex;align-items:center;justify-content:center;">
+        <p style="color:#c0c0e0;font-size:0.85rem;margin:0;">
+            NACOG 2026 Conference Dashboard &nbsp;•&nbsp; 📍 Denver, Colorado &nbsp;•&nbsp; Built with ❤️ using Streamlit & Plotly
+        </p>
+    </div>
 </div>
 """, unsafe_allow_html=True)

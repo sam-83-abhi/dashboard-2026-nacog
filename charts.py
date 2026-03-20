@@ -161,7 +161,7 @@ def render_row4(fdf):
             cc.columns = ["Church", "Count"]
             fig = px.bar(cc, x="Count", y="Church", title="⛪ Top Churches", color="Church",
                          color_discrete_sequence=COLORS, text_auto=True, orientation="h")
-            fig.update_traces(marker_line_width=0, textposition="outside")
+            fig.update_traces(marker_line_width=0, textposition="inside", textfont=dict(color="#ffffff", size=13))
             fig.update_layout(**CHART_LAYOUT, showlegend=False, bargap=0.35)
         else:
             fig = go.Figure()
